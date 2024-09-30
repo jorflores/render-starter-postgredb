@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../model/User');
+const Biblioteca = require('../model/Biblioteca');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { verifyToken } = require('../middleware/verify');
@@ -10,6 +11,11 @@ const { verifyToken } = require('../middleware/verify');
 router.get("/",verifyToken, async (req, res) => {
     const users = await User.findAll();
     res.json(users).status(200);
+  });
+
+  router.get("/biblioteca", async (req, res) => {
+    const biblio = await Biblioteca.findAll();
+    res.json(biblio).status(200);
   });
 
 router.post("/register", async (req, res) => {
