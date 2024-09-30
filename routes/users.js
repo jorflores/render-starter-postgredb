@@ -3,10 +3,11 @@ const router = express.Router();
 const User = require('../model/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { verifyToken } = require('../middleware/verify');
 
 
 
-router.get("/", async (req, res) => {
+router.get("/",verifyToken, async (req, res) => {
     const users = await User.findAll();
     res.json(users).status(200);
   });
